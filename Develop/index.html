@@ -24,11 +24,8 @@
     <div class="text-center mb-5">
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
     </div>
-
-
     
-    
-    <!-- added modal with form to add tasks into the ToDO list -->
+    <!-- Created a modal with a form to add tasks -->
     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -36,34 +33,27 @@
             <h5 class="modal-title" id="formModalLabel">Add Task</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body"></div>
-          <form id="task-form">
-            <div class="mb-3">
-              <label for="task-name" class="form-label">Task Name</label>
-              <input type="text" class="form-control" id="task-name" name="task-name" required />
-            </div>
-            <div class="mb-3">
-              <label for="task-description" class="form-label">Task Description</label>
-              <textarea class="form-control" id="task-description" name="task-description" rows="3" required></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="task-due-date" class="form-label
-              ">Due Date</label>
-              <input type="date" class="form-control" id="task-due-date" name="task-due-date" required />
-            </div>
-            <button type="submit" class="btn btn-primary">Add Task</button>
-          </form>
+
+          <div class="modal-body">
+            <form id="taskForm">
+              <div class="mb-3">
+                <label for="taskTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="taskTitle" required>
+              </div>
+              <div class="mb-3">
+                <label for="taskDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="taskDescription" rows="3"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="taskDeadline" class="form-label">Deadline</label>
+                <input type="date" class="form-control" id="taskDeadline" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Add Task</button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    
-
-
-
-
-
-<!-- starter code-->
-
+    </div>   
     <div class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
@@ -71,7 +61,7 @@
             <h2 class="card-title mb-1">To Do</h2>
           </div>
           <div class="card-body bg-light">
-            <div id="todo-cards"></div>
+            <div id="to-do-cards"></div>
           </div>
         </div>
       </div>
