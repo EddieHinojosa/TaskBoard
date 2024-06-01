@@ -102,64 +102,52 @@ function handleAddTask(event) {
     renderTaskList();
     $("#taskTitle, #taskDeadline, #taskDescription").val("");
     $("#formModal").modal("hide");
-}
+};
 
 
 
 
-// Todo: create a function to handle deleting a task
 
-
+// Function to handle deleting a task
 function handleDeleteTask(event) {
     event.preventDefault();
-    // Get task ID from data attribute of the delete button
+    // Get the id of the task to delete
     let taskId = $(event.target).data("task-id");
-    console.log("Deleting Task ID:", taskId);
-    
-    // Find index of task in taskList array
-    let taskIndex = taskList.findIndex(task => task.id === taskId);
-    console.log("Task Index:", taskIndex);
-    
-    // If task is found, remove it from taskList array
-    if (taskIndex !== -1) {
-        taskList.splice(taskIndex, 1);
-        console.log("Task List After Deletion:", taskList);
-        
-        // Re-render task list
+    let task = taskList.find(task => task.id === taskId);
+    //remove the task from the task list
+    if (task) {
+        taskList = taskList.filter(task => task.id !== taskId);
         renderTaskList();
         
-        // Update tasks in local storage
+        // this will update the task list in localStorage
         localStorage.setItem("tasks", JSON.stringify(taskList));
-        
-        console.log("Task deleted:", taskId);
-    } else {
-        console.log("Task not found:", taskId);
     }
 }
 
-// Todo: create a function to handle dropping a task into a new status lane
+
+
+
+
+
+
+// Function to handle dropping a task into a new status lane
+
 function handleDrop(event, ui) {
-    // Get the id of the dropped task
-    let taskId = ui.draggable.attr("id").split("-")[1];
-    
-    // Get the status of the lane where the task was dropped
+    let taskId = parseInt(ui.draggable.attr("id").split("-")[1]);
     let newStatus = $(this).attr("id").replace("-cards", "");
+    let task = taskList.find(task => task.id === taskId);
     
-    // Find the task in the taskList array
-    let taskIndex = taskList.findIndex(task => task.id === parseInt(taskId));
-    
-    // If the task is found, update its status
-    if (taskIndex !== -1) {
-        taskList[taskIndex].status = newStatus;
-        
-        // Re-render the task list to reflect the updated status
+    // If the task exists, updates the status
+    if (task) {
+        task.status = newStatus;
+        //re-renders list
         renderTaskList();
-        
-        console.log(`Task ${taskId} moved to ${newStatus}`);
-    } else {
-        console.log(`Task ${taskId} not found`);
     }
 }
+
+
+
+
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function() {
