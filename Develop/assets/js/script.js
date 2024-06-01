@@ -74,35 +74,39 @@ function renderTaskList() {
 
 
     // Draggable task cards
-     $(".task-card").draggable({
+    $(".task-card").draggable({
         //this will keep the task-cards within the container rather than being shown outside of the container
         zIndex: 100,
     });
-    
 }
 
 
-// Todo: create a function to handle adding a new task
+// Function to handle adding a new task
 function handleAddTask(event) {
     event.preventDefault();
-    let title = $("#taskTitle").val();
-    let deadline = $("#taskDeadline").val();
-    let description = $("#taskDescription").val();
     let taskId = generateTaskId();
     let newTask = {
         id: taskId,
-        title: title,
-        description: description,
+        title: $("#taskTitle").val(),
+        description: $("#taskDescription").val(),
         status: "to-do",
-        deadline: deadline,
-    };    
+        deadline: $("#taskDeadline").val(),
+    }; 
+    //if any of the fields are empty, an alert will pop up   
+    if (!newTask.title || !newTask.description || !newTask.deadline) {
+        alert("Missing information, please fill out all required fields.");
+        return;
+    }
+
     taskList.push(newTask);
     renderTaskList();
-    $("#taskTitle").val("");
-    $("#taskDeadline").val("");
-    $("#taskDescription").val("");
+    $("#taskTitle, #taskDeadline, #taskDescription").val("");
     $("#formModal").modal("hide");
 }
+
+
+
+
 // Todo: create a function to handle deleting a task
 
 
