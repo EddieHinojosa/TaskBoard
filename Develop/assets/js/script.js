@@ -33,6 +33,20 @@ function createTaskCard(task) {
 }
 
 // Todo: create a function to render the task list and make cards draggable
+function renderTaskList() {
+    $("#to-do").empty();
+    $("#in-progress").empty();
+    $("#done").empty();
+    taskList.forEach(task => {
+        const card = createTaskCard(task);
+        $(`#${task.status}`).append(card);
+        card.draggable({
+            revert: "invalid",
+            helper: "clone"
+        });
+    });
+}
+
 function renderTaskList() { 
     taskList.forEach(task => {
         const card = createTaskCard(task);
@@ -97,4 +111,5 @@ $(document).ready(() => {
     });
     taskDueDate.datepicker();
 });
+
 
