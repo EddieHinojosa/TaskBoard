@@ -27,6 +27,10 @@ IF a task is no longer needed, use the "Delete" button that is at the bottom of 
 
 
 
+https://github.com/EddieHinojosa/TaskBoard/assets/161403923/9f6f1cd4-b845-4483-bc15-832846d8bb30
+
+
+
 
 
 
