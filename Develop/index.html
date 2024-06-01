@@ -24,7 +24,63 @@
     <div class="text-center mb-5">
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
     </div>
-    <!-- Todo: Create a modal with a form to add tasks -->
+
+
+    <!-- added modal with form to add tasks into the ToDO list -->
+    <div class="modal" id="formModal" tabindex="-1" aria-labelledby="formModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Header -->
+          <div class="modal-header">
+            <h5 class="modal-title">Add Task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+    
+    
+    
+    
+          <!-- Body -->
+          <div class="modal-body">
+            <form id="taskForm">
+              <div class="row">
+    
+                <!-- Task Title -->
+                <div class="col-md-6 mb-3">
+                  <label for="formTitle" class="col-form-label">Task Title</label>
+                  <input type="text" class="form-control" id="formTitle">
+                </div>
+    
+                <!-- Task Due Date -->
+                <div class="col-md-6 mb-3">
+                  <label for="formDate" class="col-form-label">Task Due Date</label>
+                  <input autocomplete="off" type="text" id="formDate" class="form-control" min="2000-01-01" />
+                </div>
+              </div>
+    
+              <!-- Task Description -->
+              <div class="mb-3">
+                <label for="formDescription" class="col-form-label">Task Description</label>
+                <textarea class="form-control" id="formDescription" rows="3"></textarea>
+              </div>
+            </form>
+          </div>
+    
+          <!-- Add Task Button -->
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-success" id="addTaskButton">Add Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
     <div class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
