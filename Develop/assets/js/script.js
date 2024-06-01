@@ -4,7 +4,7 @@ let nextId = JSON.parse(localStorage.getItem("nextId")) || 1;
 
 
 
-// Todo: create a function to generate a unique task id
+// Function to generate a unique task id
 function generateTaskId() {
     let id = nextId;
     // Increment nextId and save to localStorage
@@ -19,25 +19,38 @@ function generateTaskId() {
 
 
 
-// Todo: create a function to create a task card
+// Function to create a task card
 function createTaskCard(task) {
-    let now = new Date();
-    let deadlineDate = new Date(task.deadline);
     let cardColorClass = "";
-
-    // deadline parameters
-    if (deadlineDate < now) {
-        cardColorClass = "bg-danger"; // Overdue: red
-    } else if (deadlineDate - now <= 48 * 60 * 60 * 1000) { // 2 days in milliseconds
-        cardColorClass = "bg-warning"; // Nearing deadline: yellow
+    let deadline = new Date(task.deadline);
+    let today = new Date();
+    let twoDaysFromNow = new Date();
+    twoDaysFromNow.setDate(today.getDate() + 2);
+    //if past deadline, card is red
+    if (deadline < today) {
+        cardColorClass = "bg-danger";
+    } 
+    //if deadline is within 2 days, card is yellow
+    else if (deadline < twoDaysFromNow) {
+        cardColorClass = "bg-warning";
+    } 
+    //if deadline is in the future, card is white/not assigned a color
+    else {
+        cardColorClass = "";
     }
-// task card html 
+
+
+
+
+
+
+// task card is added to the task list with HTML formatting 
     let taskCardHTML = `
     <div class="card task-card mb-3 ${cardColorClass}" id="task-${task.id}">
         <div class="card-body">
             <h5 class="card-title">${task.title}</h5>
-            <p class="card-text">${task.description}</p>
-            <p class="card-text">Deadline: ${task.deadline}</p>
+                <p class="card-text">${task.description}</p>
+                <p class="card-text">Deadline: ${task.deadline}</p>
             <button class="btn btn-danger delete-task" data-task-id="${task.id}">Delete</button>
         </div>
     </div>
@@ -47,28 +60,24 @@ function createTaskCard(task) {
 
 
 
-// Todo: create a function to render the task list and make cards draggable
+// Function to render the task list and make cards draggable
 function renderTaskList() {
-    //clear existing task cards
     $(".lane .task-card").remove();
-    //iterate through each task and create a task card
     if (taskList.length > 0) {
         taskList.forEach(task => {
             let taskCard = createTaskCard(task);
             $(`#${task.status}-cards`).append(taskCard);
         });
     }
-    // Save task list to localStorage
+    // Save task to localStorage
     localStorage.setItem("tasks", JSON.stringify(taskList));
 
+
     // Draggable task cards
-    $(".task-card").draggable({
-        containment: ".container", 
-        revert: true,
-        stack: ".task-card",
-        scroll: true,
+     $(".task-card").draggable({
+        //this will keep the task-cards within the container rather than being shown outside of the container
+        zIndex: 100,
     });
-    console.log("Rendered task list:", taskList);
     
 }
 
